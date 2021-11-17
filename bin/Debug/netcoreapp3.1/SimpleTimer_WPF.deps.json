@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "SimpleTimer_WPF/1.0.0": {
+        "runtime": {
+          "SimpleTimer_WPF.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SimpleTimer_WPF/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
