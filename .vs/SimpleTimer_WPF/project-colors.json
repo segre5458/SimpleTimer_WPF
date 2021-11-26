@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "dcfd05d7-5e6e-4a56-82c3-2ad53c49a4ba": {
+      "ProjectGuid": "dcfd05d7-5e6e-4a56-82c3-2ad53c49a4ba",
+      "DisplayName": "SimpleTimer_WPF",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

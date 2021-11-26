@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleTimer_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Timer" Height="250" Width="400"
+        ResizeMode="NoResize">
     <Grid>
-
+        <TextBlock Name="tbTime"  HorizontalAlignment="Center" VerticalAlignment="Top" Height="200" Width="350" FontSize="85"/>
+        <TextBox Name="Time" HorizontalAlignment="Center" VerticalAlignment="Top" Height="150" Width="350" FontSize="85" Visibility="Visible"/>
+        <Button x:Name="BtnStart" Content="Start" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="30,0,0,0" Width="50" Height="30" Click="BtnStart_Click"/>
+        <Button x:Name="BtnStop" Content="Stop" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,0" Width="50" Height="30" Click="BtnStop_Click"/>
+        <Button x:Name="BtnReset" Content="Reset" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="50" Height="30" Click="BtnReset_Click"/>
     </Grid>
 </Window>
