@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
 using System.Diagnostics;
+using System.Threading;
 
 namespace SimpleTimer_WPF
 {
@@ -23,43 +24,48 @@ namespace SimpleTimer_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        DispatcherTimer _timer;
-        TimeSpan _time;
+        DispatcherTimer _timer = new DispatcherTimer();
+        TimeSpan _timeSpan = new TimeSpan(0);
+        DateTime startDT = DateTime.Now;
+
         public MainWindow()
         {
             InitializeComponent();
+            _timer.Interval = TimeSpan.FromMilliseconds(10);
+            _timer.Tick += timer_Tick;
         }
         private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
-            var time = double.Parse(Time.Text);
-            Debug.WriteLine(time);
-            Time.Visibility = Visibility.Hidden;
+            startDT = DateTime.Now;
+            _timer.Start();
 
-            Timer(time);
+            BtnStart.IsEnabled = false;
+            BtnReset.IsEnabled = false;
+            BtnStop.IsEnabled = true;
         }
 
         private void BtnReset_Click(object sender, RoutedEventArgs e)
         {
-            Time.Visibility = Visibility.Visible;
+            _timeSpan = new TimeSpan(0);
+            startDT = DateTime.Now;
+            tbTime.Text = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", _timeSpan.Hours, _timeSpan.Minutes, _timeSpan.Seconds, _timeSpan.Milliseconds / 10);
         }
 
         private void BtnStop_Click(object sender, RoutedEventArgs e)
         {
             _timer.Stop();
+            _timeSpan += DateTime.Now - startDT;
+
+            BtnStart.IsEnabled = true;
+            BtnReset.IsEnabled = true;
+            BtnStop.IsEnabled = false;
         }
 
-        public void Timer(double time)
+        private void timer_Tick(object sender, EventArgs e)
         {
-            _time = TimeSpan.FromSeconds(time);
-
-            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
-            {
-                tbTime.Text = _time.ToString("c");
-                if (_time == TimeSpan.Zero) _timer.Stop();
-                _time = _time.Add(TimeSpan.FromSeconds(-1));
-            }, Application.Current.Dispatcher);
-
-            _timer.Start();
+            TimeSpan timeSpan = DateTime.Now - startDT + _timeSpan;
+            tbTime.Text = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
         }
+
     }
 }
